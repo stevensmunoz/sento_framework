@@ -13,5 +13,5 @@
 
 Route::get('/', function()
 {
-	return View::make('plantilla.plantilla');
+	return View::make('index');
 });
