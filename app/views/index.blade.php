@@ -1,10 +1,13 @@
 @extends('plantilla.plantilla')
 
 @section('contenido')
+	@include('plantilla.mensajes')
 	<div class="jumbotron">
-				<h1>Sento</h1>
-				<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-				<p><a class="btn btn-primary btn-lg" role="button">Leer más &raquo;</a></p>
+		<h1>Sento</h1>
+		<p>
+			This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+		</p>
+		<p><a class="btn btn-primary btn-lg" role="button">Leer más &raquo;</a></p>
 		</div>
 		<div class="row">
 			<div class="col-md-4">

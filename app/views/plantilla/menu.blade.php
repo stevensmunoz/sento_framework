@@ -12,24 +12,48 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Inicio</a></li>
-			<li><a href="#">¿Qué es Sento?</a></li>
-			<li><a href="#">Nuestros Clientes</a></li>
-			<li><a href="#">Comprar Licencia</a></li>
-			<!--<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else here</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Separated link</a></li>
-					<li class="divider"></li>
-					<li><a href="#">One more separated link</a></li>
-				</ul>
-			</li>-->
+			{{-- Menu publico --}}
+			@if(!Auth::check())
+				<li><a href="#">¿Qué es Sento?</a></li>
+				<li><a href="#">Nuestros Clientes</a></li>
+				<li><a href="#">Comprar Licencia</a></li>
+			@endif
+
+			{{-- Menu Administrador --}}
+			@if(Auth::check() AND Auth::getUser()->id_rol == 1)
+				<li><a href="#">Clientes</a></li>
+				<li><a href="#">Planes</a></li>
+				<li><a href="#">Real time</a></li>
+				<li><a href="#">Envios</a></li>
+				<li><a href="#">Estadisticas</a></li>
+				<li><a href="#">Configuraciónes</a></li>
+			@endif
+
+			{{-- Menu Cliente --}}
+			@if(Auth::check() AND Auth::getUser()->id_rol == 2)
+				<li><a href="#">Crear Envio</a></li>
+				<li><a href="#">Bases de datos</a></li>
+				<li><a href="#">Estadisticas</a></li>
+				<li><a href="#">Configuraciónes</a></li>
+				<li><a href="#">Soporte</a></li>
+			@endif
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#" data-toggle="modal" data-target="#modal_iniciar_sesion">Clientes</a></li>
+			@if(!Auth::check())
+				<li><a href="#" data-toggle="modal" data-target="#modal_iniciar_sesion">Clientes</a></li>
+			@endif
+			@if(Auth::check())
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::getUser()->nombre}} <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Perfil</a></li>
+						<li><a href="#">Contraseña</a></li>
+						<li class="divider"></li>
+						<li>{{HTML::link('/logout', 'Cerrar Sesión')}}</li>
+
+					</ul>
+				</li>
+			@endif
 		</ul>
 	</div>
 </nav>
@@ -43,26 +67,10 @@
 				<h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="form-group">
-						<label for="usuario">Nombre de Usuario</label>
-						<input type="email" class="form-control" id="usuario" placeholder="Enter email">
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" class="form-control" id="password" placeholder="Password">
-					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox"> Recordarme
-						</label>
-					</div>
-					<a href="#" class="btn btn-link">¿Olvidó su contraseña?</a>
-				</form>
+				@include('plantilla.login')
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary pull-right">Entrar</button>
 			</div>
 			</div>
 	</div>

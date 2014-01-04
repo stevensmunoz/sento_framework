@@ -12,13 +12,21 @@ class CreateUserTable extends Migration {
 	 */
 	public function up()
 	{
-		/* Tabla estado de usuario administrador */
+		/* Tabla estado de usuario */
 		Schema::create('user_estado', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('nombre');
 			$table->timestamps();
 		});
-		/* Usuario administrador del sistema */
+
+		/* Tabla rol de usuario */
+		Schema::create('user_rol', function(Blueprint $table) {
+			$table->increments('id');
+			$table->string('nombre');
+			$table->timestamps();
+		});
+
+		/* Usuario del sistema */
 		Schema::create('user', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('nombre');
@@ -27,10 +35,13 @@ class CreateUserTable extends Migration {
 			$table->string('email');
 			$table->integer('id_estado')->unsigned();
 			$table->foreign('id_estado')->references('id')->on('user_estado') ->onDelete('cascade');
+
+			$table->integer('id_rol')->unsigned();
+			$table->foreign('id_rol')->references('id')->on('user_rol') ->onDelete('cascade');
+			$table->dateTime('ultimo_acceso')->nullable()->default(null);
 			$table->timestamps();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.
@@ -39,8 +50,9 @@ class CreateUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_estado');
-		Schema::drop('user');
+		Schema::dropIfExists('user');
+		Schema::dropIfExists('user_estado');
+		Schema::dropIfExists('user_rol');
 	}
 
 }

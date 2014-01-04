@@ -15,3 +15,15 @@ Route::get('/', function()
 {
 	return View::make('index');
 });
+
+Route::get('/escritorio',  array('before' => 'auth', function ()
+{
+	return View::make('admin.escritorio');
+}));
+
+Route::post("/login", "userController@login");
+
+Route::get('/logout', function(){
+	Auth::logout();
+    return Redirect::to('/');
+});
