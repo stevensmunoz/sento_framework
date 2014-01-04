@@ -9,7 +9,7 @@
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox"> Recordarme
+							<input type="checkbox" name="recordarme"> Recordarme
 						</label>
 					</div>
 					<button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>

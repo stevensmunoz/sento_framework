@@ -6,7 +6,7 @@
 	<meta name="description" content="Plataforma para campañas de Email Marketing.">
 	<meta name="author" content="imosaico">
 	{{--<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">--}}
-	<title>Sento | Email Marketing</title>
+	<title>@yield('titulo', 'Sento | Email Marketing')</title>
 
 	{{-- Bootstrap core CSS --}}
 	{{HTML::style('assets/css/bootstrap.css')}}
